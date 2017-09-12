@@ -148,7 +148,8 @@
     };
     $("#barcode").on('input', function() {
         $("#loading").removeClass('hidden');
-            getProduct(code);
+        var code = $("#barcode").val();
+        getProduct(code);
     });
 
     function getProduct(barcode) {
