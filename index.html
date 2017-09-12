@@ -147,14 +147,10 @@
         document.getElementById("barcode").focus();
     };
     $("#barcode").on('input', function() {
-        if ($(this).val().length == 13) {
+        if ($(this).val().length > 12) {
             $("#loading").removeClass('hidden');
             var code = $("#barcode").val();
             getProduct(code);
-        }
-        else
-        {
-            $('#no_product').removeClass('hidden');
         }
     });
 
