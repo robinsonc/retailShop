@@ -2,7 +2,7 @@
 
 	define('DB_HOST','localhost');
 	define('DB_USERNAME','root');
-	define('DB_PASSWORD','wizroots@123');
+	define('DB_PASSWORD','shoppersstop');
 	define('DB_DATABASE','shoppers');
 
 	$mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
