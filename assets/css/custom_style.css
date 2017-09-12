@@ -1,0 +1,276 @@
+/*Custom styles*/
+
+body {
+    font-family: 'PT Sans', sans-serif;
+    background: url(../images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1920px;
+    width: 1080;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 700;
+    color: #000;
+}
+
+.starter-template {
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 97%;
+    }
+}
+
+.custom-container-top {
+    background: #f9f9f9;
+    position: relative;
+    margin-bottom: 85px;
+    height: 400px;
+}
+
+.custom-container-top:before {
+    content: "";
+    position: absolute;
+    width: calc(100% + 50px);
+    height: 200px;
+    background: #f9f9f9;
+    bottom: -75px;
+    left: -25px;
+    border-radius: 50%;
+}
+
+.logo {
+    position: absolute;
+    top: 0;
+    right: 2.5%;
+    z-index: 9;
+}
+
+.logo img {
+    height: 80px;
+}
+
+.card {
+    background: #f9f9f9;
+    height: 320px;
+    margin-bottom: 100px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.33);
+}
+
+.text-white {
+    color: #fff;
+    padding: 30px 0px;
+}
+
+.text-logo {
+    margin-top: -11px;
+    margin-right: 10px;
+}
+
+.head-text {
+    line-height: 30px;
+    color: #000;
+    font-size: 24px;
+    margin-top: 175px;
+    font-weight: 800;
+}
+
+font.sub-script {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.product_image {
+    padding-top: 30px;
+    height: 203px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    background-size: contain;
+    width: 275px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: 40px;
+}
+
+.price_tag {
+    width: 50%;
+    height: 30px;
+    background-color: #333;
+    position: relative;
+    float: left;
+}
+
+.price_tag:before {
+    content: "";
+    position: absolute;
+    border: 15px solid #f9f9f9;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    right: 0;
+    width: 16px;
+    height: 30px;
+    box-shadow: 4px 5px 4px #fff;
+}
+
+.price_tag span {
+    color: #fff;
+    padding: 6px;
+    margin-left: 10px;
+    line-height: 20px;
+    font-size: 20px;
+    position: absolute;
+}
+
+.location {
+    float: left;
+    display: inline-block;
+    margin-left: 15px;
+    margin-top: 7px;
+    font-weight: 800;
+    color: #000;
+}
+
+.card_logo {
+    height: 75px;
+    width: 75px;
+    margin: 15px;
+    position: absolute;
+}
+
+.img-div {
+    float: left;
+}
+
+.img-div .main-product {
+    object-fit: contain;
+    height: 350px;
+    width: 300px;
+    margin-top: 50px;
+}
+
+.content-div {
+    margin-top: 50px;
+}
+
+.content-div .main-product-logo {
+    object-fit: contain;
+    height: 100px;
+    object-position: left;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    width: 150px;
+}
+
+p.main-product-price {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+}
+
+p.main-product-price span.strike-price {
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: 400;
+    text-decoration: line-through;
+}
+
+p.main-product-price span.discount {
+    color: red;
+    font-weight: 400;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+p.features {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+p.features span.category {
+    font-weight: 700;
+}
+
+span.color {
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    border: 0px;
+    margin-left: 5px;
+    margin-top: -10px;
+}
+
+span.product_discount {
+    float: left;
+    right: 30px;
+    font-size: 10px;
+    margin-top: 6px;
+}
+
+span.strike-price {
+    font-size: 10px;
+    text-decoration: line-through;
+    right: 30px;
+    margin-top: -7px;
+}
+
+p.text-center.product_name {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+#loading,
+#no_product {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 10000000000;
+    background: #fff;
+    top: 0;
+    left: 0;
+}
+
+#loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #000000;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

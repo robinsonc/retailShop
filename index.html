@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shoppers Stop</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+    <link href="assets/css/custom_style.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+    <input type="text" id="barcode" style="position:fixed;opacity:0">
+    <div class="idle">
+        <img src="assets/images/back.jpg" class="img-responsive">
+    </div>
+
+
+    <!--    add hidden div below-->
+    <div class="main-data hidden">
+        <div class="logo">
+            <img src="https://cdn.worldvectorlogo.com/logos/adobe-2.svg">
+        </div>
+        <div class="container-fluid custom-container-top">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="img-div">
+                                <img src="assets/images/green_tee.png" class="img-responsive main-product">
+
+
+                            </div>
+                            <div class="content-div">
+                                <img src="http://www.sobhacitymall.com/wp-content/uploads/2016/02/AllenSolly-Logo.jpg" class="main-product-logo">
+                                <h3 class="main-product-name">MusclePharm Solid Men's Round Neck Green T-Shirt</h3>
+                                <p class="main-product-price">
+                                    <i class="fa fa-inr" aria-hidden="true"></i> 2000
+                                    <span class="strike-price"><i class="fa fa-inr" aria-hidden="true"></i> 2200</span>
+                                    <span class="discount">40% Off</span></p>
+                                <p class="features">Style : <span class="category">Sports</span></p>
+                                <p class="features colour">Available Colors :
+                                    <span style="background: #F44336" class="color"></span>
+                                    <span style="background: #673AB7" class="color"></span>
+                                    <span style="background: #FFEB3B" class="color"></span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <p style="margin-top: 175px;" class="text-right head-text">Below We have Something Which Looks Good with
+                                <br/>
+                                <font class="sub-script">MusclePharma Solid Men’s Round Neck Green T-Shirt</font>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center text-white">Frequently Bought Together</h1>
+                <div id="frequent">
+                  
+                </div>
+                <h1 class="text-center text-white">People Who Viewed This Also Saw This</h1>
+                <div id="most_viewed">
+                   
+                </div>
+                <h1 class="text-center text-white"><img class="text-logo" src="https://prodstatic.shoppersstop.com/_ui/responsive/common/assets/images/shoppersstop-logo.svg">Special Recommendations</h1>
+                <div id="shopper_stop">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="no_product" class="hidden">
+        <img src="assets/images/wrong.jpg" class="img-responsive">
+    </div>
+    <div id="loading" class="hidden">
+        <span id="loader"></span>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+
+
+
+</body>
+
+</html>
+
+
+<script>
+    window.onload = function() {
+        document.getElementById("barcode").focus();
+    };
+    $("#barcode").on('input', function() {
+        $("#loading").removeClass('hidden');
+        if ($(this).val().length > 12) {
+            var code = $("#barcode").val();
+            getProduct(code);
+        }
+    });
+
+    function getProduct(barcode) {
+        var APP_URL = "http://localhost/shoppers_stop/data.php";
+        var idle_time_out = "";
+        $.ajax({
+            url: APP_URL,
+            type: 'Post',
+            dataType: 'json',
+            data: {
+                barcode: barcode
+            },
+            beforeSend: function() {
+
+            },
+            statusCode: {
+                500: function(data) {
+
+                },
+                200: function(data) {
+                    $('#no_product').addClass('hidden');
+                    $(".main-data").removeClass('hidden');
+                    $('.idle').addClass('hidden');
+                    $('#frequent').html("");
+                    $('#most_viewed').html("");
+                    $('#shopper_stop').html("");
+                    idle_time_out = data.configuration.idle_time_out;
+                    $(data.products).each(function(key, index) {
+                        var main_product_price = index.discount_percentage != 0 ? '<i class="fa fa-inr" aria-hidden="true"></i> ' + index.discount_price + ' <span class="strike-price"><i class="fa fa-inr" aria-hidden="true"></i>' + index.price + '</span><span class="discount">' + index.discount_percentage + '% Off</span>' : '<i class="fa fa-inr" aria-hidden="true"></i> ' + index.price + '';
+                        $('.main-product-name').text(index.product_name);
+                        $('.sub-script').text(index.product_name);
+                        $('.category').text(index.style);
+                        $('.main-product-logo').attr('src', index.brand_logo);
+                        $('.main-product-price').html(main_product_price);
+                        $('.main-product').attr('src', index.product_image);
+                        if (index.color.length > 0) {
+                            $('.colour').html('Available Colors :')
+                            var split_color = index.color.split(',');
+
+                            $(split_color).each(function(k, i) {
+                                $('.colour').append('<span style="background: ' + i + '" class="color"></span>');
+                            })
+                        } else {
+                            $('.colour').html('')
+                        }
+
+
+                        productList("frequent", index.frequently_bought);
+                        productList("most_viewed", index.viewed_products);
+                        productList("shopper_stop", index.shopper_products);
+
+                    })
+                    setTimeout(function() {
+                        location.reload()
+                    }, idle_time_out);
+                },
+                204: function(data) {
+                    $('#no_product').removeClass('hidden');
+                    setTimeout(function() {
+                        location.reload()
+                    }, 3000);
+                },
+                400: function(data) {
+
+                }
+            },
+            error: function() {
+                alert('Something went wrong!!!!Plz try again later');
+            },
+            complete: function() {
+
+                $("#barcode").val("");
+                document.getElementById("barcode").focus();
+                $('#loading').addClass('hidden');
+            }
+        });
+
+    }
+
+    function productList(id, data) {
+        $('#' + id).html("");
+        $(data).each(function(frequentkey, frequent) {
+            var frequently_bought_price = frequent.discount_percentage != 0 ? '<div class="price_tag"><span><i class="fa fa-inr" aria-hidden="true"></i> ' + frequent.discount_price + '</span><span class="product_discount">' + frequent.discount_percentage + '% Off</span> <span class="strike-price"><i class="fa fa-inr" aria-hidden="true"></i> ' + frequent.price + '</span></div>' : '<div class="price_tag"><span><i class="fa fa-inr" aria-hidden="true"></i> ' + frequent.price + '</span></div>';
+
+            $('#' + id).append('<div class="col-md-4"> <div class="card"><div class="card_logo"><img class="img-responsive" src="' + frequent.brand_logo + '"></div><div class="product_image" style="background-image: url(' + frequent.product_image + ')"></div><p class="text-center product_name">' + frequent.product_name + '</p>' + frequently_bought_price + '<div class="location"><span>RACK ' + frequent.rack_no + ' - ISLE: ' + frequent.isle_no + '</span></div></div></div>')
+        })
+    }
+</script>
