@@ -65,15 +65,57 @@
             <div class="row">
                 <h1 class="text-center text-white">Frequently Bought Together</h1>
                 <div id="frequent">
-                  
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
                 </div>
                 <h1 class="text-center text-white">People Who Viewed This Also Saw This</h1>
                 <div id="most_viewed">
-                   
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
                 </div>
                 <h1 class="text-center text-white"><img class="text-logo" src="https://prodstatic.shoppersstop.com/_ui/responsive/common/assets/images/shoppersstop-logo.svg">Special Recommendations</h1>
                 <div id="shopper_stop">
-                   
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,20 +142,20 @@
 
 
 <script>
+    var time_out;
     window.onload = function() {
         document.getElementById("barcode").focus();
     };
     $("#barcode").on('input', function() {
         $("#loading").removeClass('hidden');
-        if ($(this).val().length > 12) {
-            var code = $("#barcode").val();
             getProduct(code);
-        }
     });
 
     function getProduct(barcode) {
         var APP_URL = "data.php";
         var idle_time_out = "";
+        
+        clearTimeout(time_out);
         $.ajax({
             url: APP_URL,
             type: 'Post',
@@ -138,7 +180,7 @@
                     idle_time_out = data.configuration.idle_time_out;
                     $(data.products).each(function(key, index) {
                         var main_product_price = index.discount_percentage != 0 ? '<i class="fa fa-inr" aria-hidden="true"></i> ' + index.discount_price + ' <span class="strike-price"><i class="fa fa-inr" aria-hidden="true"></i>' + index.price + '</span><span class="discount">' + index.discount_percentage + '% Off</span>' : '<i class="fa fa-inr" aria-hidden="true"></i> ' + index.price + '';
-                        $('.main-product-name').text(index.product_name);
+                        $('.main-product-name').text(index.product_name); 
                         $('.sub-script').text(index.product_name);
                         $('.category').text(index.style);
                         $('.main-product-logo').attr('src', index.brand_logo);
@@ -161,25 +203,22 @@
                         productList("shopper_stop", index.shopper_products);
 
                     })
-                    setTimeout(function() {
+                    time_out = setTimeout(function() {
                         location.reload()
                     }, idle_time_out);
                 },
                 204: function(data) {
                     $('#no_product').removeClass('hidden');
-                    setTimeout(function() {
-                        location.reload()
-                    }, 3000);
                 },
                 400: function(data) {
 
                 }
             },
-            error: function() {
-                alert('Something went wrong!!!!Plz try again later');
+            error: function(error) {
+               console.log(error);
             },
             complete: function() {
-
+               
                 $("#barcode").val("");
                 document.getElementById("barcode").focus();
                 $('#loading').addClass('hidden');

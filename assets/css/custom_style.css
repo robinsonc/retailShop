@@ -165,7 +165,6 @@ font.sub-script {
 
 .content-div .main-product-logo {
     object-fit: contain;
-    height: 100px;
     object-position: left;
     border: 1px solid #eee;
     border-radius: 5px;
