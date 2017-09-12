@@ -147,8 +147,8 @@
         document.getElementById("barcode").focus();
     };
     $("#barcode").on('input', function() {
-        $("#loading").removeClass('hidden');
         if ($(this).val().length == 13) {
+            $("#loading").removeClass('hidden');
             var code = $("#barcode").val();
             getProduct(code);
         }
@@ -223,7 +223,6 @@
             },
             error: function(error) {
                console.log(error);
-               $('#loading').addClass('hidden');
             },
             complete: function() {
                
