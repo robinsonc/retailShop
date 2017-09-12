@@ -148,8 +148,14 @@
     };
     $("#barcode").on('input', function() {
         $("#loading").removeClass('hidden');
-        var code = $("#barcode").val();
-        getProduct(code);
+        if ($(this).val().length == 13) {
+            var code = $("#barcode").val();
+            getProduct(code);
+        }
+        else
+        {
+            $('#no_product').removeClass('hidden');
+        }
     });
 
     function getProduct(barcode) {
