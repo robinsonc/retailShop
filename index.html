@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 </head>
 
-<body>
+<body style="width:80%">
     <input type="text" id="barcode" style="position:fixed;opacity:0">
     <div class="idle">
         <img style="min-width: 100%;" src="assets/images/back.jpg" class="img-responsive">
@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-7">
+                        <div class="col-md-7">
                             <div class="img-div">
                                 <img src="assets/images/green_tee.png" class="img-responsive main-product">
 
@@ -51,7 +51,7 @@
                                     <span style="background: #FFEB3B" class="color"></span></p>
                             </div>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-md-5">
                             <p style="margin-top: 175px;" class="text-right head-text">Below We have Something Which Looks Good with
                                 <br/>
                                 <font class="sub-script">MusclePharma Solid Men’s Round Neck Green T-Shirt</font>
@@ -65,17 +65,17 @@
             <div class="row">
                 <h1 class="text-center text-white">Frequently Bought Together</h1>
                 <div id="frequent">
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
@@ -83,17 +83,17 @@
                 </div>
                 <h1 class="text-center text-white">People Who Viewed This Also Saw This</h1>
                 <div id="most_viewed">
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
@@ -101,17 +101,17 @@
                 </div>
                 <h1 class="text-center text-white"><img class="text-logo" src="https://prodstatic.shoppersstop.com/_ui/responsive/common/assets/images/shoppersstop-logo.svg">Special Recommendations</h1>
                 <div id="shopper_stop">
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <div class="card">
 
                         </div>
@@ -235,7 +235,7 @@
         $(data).each(function(frequentkey, frequent) {
             var frequently_bought_price = frequent.discount_percentage != 0 ? '<div class="price_tag"><span><i class="fa fa-inr" aria-hidden="true"></i> ' + frequent.discount_price + '</span><span class="product_discount">' + frequent.discount_percentage + '% Off</span> <span class="strike-price"><i class="fa fa-inr" aria-hidden="true"></i> ' + frequent.price + '</span></div>' : '<div class="price_tag"><span><i class="fa fa-inr" aria-hidden="true"></i> ' + frequent.price + '</span></div>';
 
-            $('#' + id).append('<div class="col-sm-4"> <div class="card"><div class="card_logo"><img class="img-responsive" src="' + frequent.brand_logo + '"></div><div class="product_image" style="background-image: url(' + frequent.product_image + ')"></div><p class="text-center product_name">' + frequent.product_name + '</p>' + frequently_bought_price + '<div class="location"><span>RACK ' + frequent.rack_no + ' - ISLE: ' + frequent.isle_no + '</span></div></div></div>')
+            $('#' + id).append('<div class="col-md-4"> <div class="card"><div class="card_logo"><img class="img-responsive" src="' + frequent.brand_logo + '"></div><div class="product_image" style="background-image: url(' + frequent.product_image + ')"></div><p class="text-center product_name">' + frequent.product_name + '</p>' + frequently_bought_price + '<div class="location"><span>RACK ' + frequent.rack_no + ' - ISLE: ' + frequent.isle_no + '</span></div></div></div>')
         })
     }
 </script>
